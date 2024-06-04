@@ -3,41 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blockchain Airbnb</title>
+    <title>House Listings</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
-    <script src="app.js" defer></script>
 </head>
 <body>
     <header>
-        <h1>Blockchain Airbnb</h1>
+        <h1>House Listings</h1>
     </header>
     <main>
-        <section>
-            <h2>List a House</h2>
-            <input type="number" id="pricePerDay" placeholder="Price per day (in ether)">
-            <button onclick="listHouse()">List House</button>
-        </section>
-
-        <section>
-            <h2>Book a House</h2>
-            <input type="number" id="houseIdToBook" placeholder="House ID">
-            <input type="datetime-local" id="startDate">
-            <input type="datetime-local" id="endDate">
-            <button onclick="bookHouse()">Book House</button>
-        </section>
-
-        <section>
-            <h2>Check In</h2>
-            <input type="number" id="bookingIdToCheckIn" placeholder="Booking ID">
-            <button onclick="checkIn()">Check In</button>
-        </section>
-
-        <section>
-            <h2>Check Out</h2>
-            <input type="number" id="bookingIdToCheckOut" placeholder="Booking ID">
-            <button onclick="checkOut()">Check Out</button>
-        </section>
+        <div class="house-listing">
+            <a href="house.html">
+                <img src="images/house1.jpg" alt="House 1">
+                <h2>Josephine's Beach House</h2>
+                <p>$200/night</p>
+            </a>
+        </div>
+        <!-- Add more house listings as needed -->
     </main>
+    <footer>
+        <p>&copy; 2024 girlyPops BnB</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.6.0/dist/web3.min.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>

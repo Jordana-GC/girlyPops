@@ -19,7 +19,7 @@
         </div>
     </main>
     <footer>
-        <p>&copy; 2024 Your Website</p>
+        <p>&copy; 2024 girlyPops BnB</p>
     </footer>
 
     <div id="bookingPopup" class="popup hidden">
@@ -29,15 +29,17 @@
             <form id="popup-booking-form">
                 <label for="popup-checkin">Check-in Date:</label>
                 <input type="date" id="popup-checkin" name="checkin" required>
-                
+
                 <label for="popup-checkout">Check-out Date:</label>
                 <input type="date" id="popup-checkout" name="checkout" required>
-                
+
                 <button type="submit">Confirm Booking</button>
             </form>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.7.0/dist/web3.min.js"></script>
+    <script src="app.js"></script>
     <script>
         const bookNowButton = document.getElementById('bookNowButton');
         const bookingPopup = document.getElementById('bookingPopup');
@@ -58,13 +60,13 @@
             }
         });
 
-        popupBookingForm.addEventListener('submit', function(event) {
+        popupBookingForm.addEventListener('submit', async function(event) {
             event.preventDefault();
             const checkinDate = document.getElementById('popup-checkin').value;
             const checkoutDate = document.getElementById('popup-checkout').value;
+            const houseId = 1;  // Assuming houseId is 1 for demo purposes
 
-            localStorage.setItem('checkin', checkinDate);
-            localStorage.setItem('checkout', checkoutDate);
+            await bookHouse(houseId, checkinDate, checkoutDate);
 
             window.location.href = "booking.html";
         });

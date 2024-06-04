@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Info</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Beautiful Beach House</h1>
+    </header>
+    <main>
+        <div class="house-info">
+            <img src="images/house1.jpg" alt="House Image">
+            <p>Description of the house including amenities, location, etc.</p>
+            <p><strong>Price:</strong> $200/night</p>
+            <button id="bookNowButton">Book Now</button>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Your Website</p>
+    </footer>
+
+    <div id="bookingPopup" class="popup hidden">
+        <div class="popup-content">
+            <span class="close" id="closePopup">&times;</span>
+            <h2>Booking Information</h2>
+            <form id="popup-booking-form">
+                <label for="popup-checkin">Check-in Date:</label>
+                <input type="date" id="popup-checkin" name="checkin" required>
+                
+                <label for="popup-checkout">Check-out Date:</label>
+                <input type="date" id="popup-checkout" name="checkout" required>
+                
+                <button type="submit">Confirm Booking</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const bookNowButton = document.getElementById('bookNowButton');
+        const bookingPopup = document.getElementById('bookingPopup');
+        const closePopup = document.getElementById('closePopup');
+        const popupBookingForm = document.getElementById('popup-booking-form');
+
+        bookNowButton.addEventListener('click', function() {
+            bookingPopup.classList.remove('hidden');
+        });
+
+        closePopup.addEventListener('click', function() {
+            bookingPopup.classList.add('hidden');
+        });
+
+        window.addEventListener('click', function(event) {
+            if (event.target == bookingPopup) {
+                bookingPopup.classList.add('hidden');
+            }
+        });
+
+        popupBookingForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const checkinDate = document.getElementById('popup-checkin').value;
+            const checkoutDate = document.getElementById('popup-checkout').value;
+
+            localStorage.setItem('checkin', checkinDate);
+            localStorage.setItem('checkout', checkoutDate);
+
+            window.location.href = "booking.html";
+        });
+    </script>
+</body>
+</html>

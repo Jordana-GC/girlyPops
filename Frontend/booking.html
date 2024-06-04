@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Booking Information</h1>
+    </header>
+    <main>
+        <form id="booking-form">
+            <label for="checkin">Check-in Date:</label>
+            <input type="date" id="checkin" name="checkin" required>
+            
+            <label for="checkout">Check-out Date:</label>
+            <input type="date" id="checkout" name="checkout" required>
+            
+            <button type="button" onclick="openCheckoutPopup()">Book Now</button>
+        </form>
+        <div id="current-booking" class="hidden">
+            <h2>Current Booking</h2>
+            <p><strong>Check-in:</strong> <span id="current-checkin"></span></p>
+            <p><strong>Check-out:</strong> <span id="current-checkout"></span></p>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 girlyPops BnB</p>
+    </footer>
+
+    <div id="checkout-popup" class="hidden">
+        <div class="popup-content">
+            <span class="close-button" onclick="closeCheckoutPopup()">&times;</span>
+            <h2>Booking Confirmation</h2>
+            <p>Check-in: <span id="popup-checkin"></span></p>
+            <p>Check-out: <span id="popup-checkout"></span></p>
+            <button onclick="confirmBooking()">Confirm Booking</button>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('booking-form');
+        const currentBookingDiv = document.getElementById('current-booking');
+        const currentCheckin = document.getElementById('current-checkin');
+        const currentCheckout = document.getElementById('current-checkout');
+        const checkoutPopup = document.getElementById('checkout-popup');
+        const popupCheckin = document.getElementById('popup-checkin');
+        const popupCheckout = document.getElementById('popup-checkout');
+
+        function openCheckoutPopup() {
+            const checkinDate = document.getElementById('checkin').value;
+            const checkoutDate = document.getElementById('checkout').value;
+
+            if (!checkinDate || !checkoutDate) {
+                alert('Please select both check-in and check-out dates.');
+                return;
+            }
+
+            popupCheckin.textContent = checkinDate;
+            popupCheckout.textContent = checkoutDate;
+            checkoutPopup.classList.remove('hidden');
+        }
+
+        function closeCheckoutPopup() {
+            checkoutPopup.classList.add('hidden');
+        }
+
+        function confirmBooking() {
+            const checkinDate = document.getElementById('checkin').value;
+            const checkoutDate = document.getElementById('checkout').value;
+
+            localStorage.setItem('checkin', checkinDate);
+            localStorage.setItem('checkout', checkoutDate);
+
+            currentCheckin.textContent = checkinDate;
+            currentCheckout.textContent = checkoutDate;
+            form.classList.add('hidden');
+            currentBookingDiv.classList.remove('hidden');
+            closeCheckoutPopup();
+        }
+
+        window.addEventListener('load', function() {
+            const savedCheckin = localStorage.getItem('checkin');
+            const savedCheckout = localStorage.getItem('checkout');
+            if (savedCheckin && savedCheckout) {
+                currentCheckin.textContent = savedCheckin;
+                currentCheckout.textContent = savedCheckout;
+                form.classList.add('hidden');
+                currentBookingDiv.classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
